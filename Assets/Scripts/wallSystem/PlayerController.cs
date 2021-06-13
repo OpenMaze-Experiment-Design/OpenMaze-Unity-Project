@@ -39,6 +39,8 @@ namespace wallSystem
         private bool _reset;
         private int localQuota;
 
+        public bool firstTrial;
+
         private void Start()
         {
             try
@@ -73,12 +75,17 @@ namespace wallSystem
             {
                 _iniRotation = Random.Range(0, 360);
             }
-            else
+            else if (E.Get().CurrTrial.trialData.UseLastPosition && E.Get().CurrTrial.TrialProgress.Num3D  > 0)
+            {
+                Debug.Log("Using Last Position");
+                transform.eulerAngles = E.Get().CurrTrial.TrialProgress.lastRotation;
+            }
+            else 
             {
                 _iniRotation = E.Get().CurrTrial.trialData.StartFacing;
             }
 
-
+            
 
 
             transform.Rotate(0, _iniRotation, 0);
@@ -120,9 +127,14 @@ namespace wallSystem
             {
                 Thread.Sleep(20);
             }
+            
+            Debug.Log("Last Trial Position: " + TrialProgress.GetCurrTrial().TrialProgress.lastPosition);
 
             TrialProgress.GetCurrTrial().TrialProgress.TargetX = pickX;
             TrialProgress.GetCurrTrial().TrialProgress.TargetY = pickY;
+            
+            Debug.Log("3D Trial: " + E.Get().CurrTrial.TrialProgress.Num3D);
+            Debug.Log("Last Position: " + E.Get().CurrTrial.TrialProgress.lastPosition);
 
             // No start pos specified so make it random.
             if (E.Get().CurrTrial.trialData.StartPosition.Count == 0)
@@ -146,6 +158,14 @@ namespace wallSystem
                 }
                 Debug.LogError("Could not randomly place player. Probably due to" +
                                " a pick up location setting");
+            }
+            else if (E.Get().CurrTrial.trialData.UseLastPosition && E.Get().CurrTrial.TrialProgress.Num3D  > 0)
+            {
+                Debug.Log("Using Last Position");
+                transform.position = TrialProgress.GetCurrTrial().TrialProgress.lastPosition;
+                var camPos = Cam.transform.position;
+                camPos.y = DS.GetData().CharacterData.Height;
+                Cam.transform.position = camPos;
             }
             else
             {
@@ -241,6 +261,16 @@ namespace wallSystem
         private void Update()
         {
             E.LogData(TrialProgress.GetCurrTrial().TrialProgress, TrialProgress.GetCurrTrial().TrialStartTime, transform);
+
+            if (E.Get().CurrTrial.trialData.Instructional == 1) return;
+            if (transform.position.y > 0 && transform.position.y < 50)
+            {
+                TrialProgress.GetCurrTrial().TrialProgress.lastPosition = transform.position;
+                TrialProgress.GetCurrTrial().TrialProgress.lastRotation= transform.eulerAngles;
+            }
+            
+
+            //Debug.Log(TrialProgress.GetCurrTrial().TrialProgress.lastPosition);
 
             // Wait for the sound to finish playing before ending the trial
             if (_playingSound)

@@ -33,6 +33,8 @@ namespace trial
         public int Visible;
         public float LastX;
         public float LastY;
+        public Vector3 lastPosition;
+        public Vector3 lastRotation;
 
         public bool isLoaded = true;
 

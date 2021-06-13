@@ -105,6 +105,7 @@ namespace data
             public bool ShowBlockTotal; // Whether or not to display the amount of goals/pickups collected (resets each block)
             public bool ShowTrialTotal; // Whether or not to display the amount of goals/pickups collected (resets each trial)
             public bool ShowNumSuccesses; // Whether or not to display the number of successful trials
+            public bool UseLastPosition;
         }
 
         // Represents an Enclosure (Maze) for the user. TODO: Enclosures can be prebuilt; located in:...

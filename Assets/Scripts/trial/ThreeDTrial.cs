@@ -25,6 +25,7 @@ namespace trial
         public override void Progress()
         {
             TrialProgress.Num3D++;
+            
 
             // If we are progressing without a success, record the failure
             // as a zero, otherwise record a 1.
@@ -63,6 +64,7 @@ namespace trial
             if (Input.GetKey(trialEndKeyCode) && (_runningTime > ignoreUserInputDelay))
             {
                 Debug.Log(_runningTime);
+                
                 Progress();
             }
         }
