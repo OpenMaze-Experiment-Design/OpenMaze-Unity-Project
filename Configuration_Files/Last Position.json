@@ -13,9 +13,14 @@
 
 "BLOCK DATA" : "BLOCK DATA---------------------*********--------------------BLOCK DATA",   
    
-    "BlockOrder" : [1],
+    "BlockOrder" : [1,2],
     
     "Blocks" : [
+        {
+            "Block 1" : "Find objects Visible",
+              "Notes" : "Trials will be presented in order from TrialOrder list",
+              "TrialOrder": [1,2,1,2,1,2,3]
+        },
         {
             "Block 1" : "Find objects Visible",
               "Notes" : "Trials will be presented in order from TrialOrder list",
