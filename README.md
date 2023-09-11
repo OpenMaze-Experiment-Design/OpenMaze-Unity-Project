@@ -14,7 +14,7 @@ If you are following along with the OpenMaze tutorials there may be discrepencie
 
 ### Prerequisites
 - Unity 2019.x or above.
-- Your PC must meet the minimum requirements to run Unity, found [here](https://unity3d.com/unity/system-requirements).
+- Your PC must meet the [minimum requirements to run Unity](https://docs.unity3d.com/Manual/system-requirements.html).
 - OpenMaze has been extensively tested on Mac OSX and Windows 10; however, the project should still behave normally on 
   most Linux distros.
 
